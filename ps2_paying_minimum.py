@@ -12,8 +12,8 @@ monthlyPaymentRate - minimum monthly payment rate as a decimal
 
 # Retrieve data from user
 balance = float(raw_input('Please enter starting balance: '))
-monthlyPaymentRate = float(raw_input('Please enter the monthly minimum payment rate (ex. 0.05): '))
-annualInterestRate = float(raw_input('Please enter the annual interest rate (ex. 0.20): '))
+monthlyPaymentRate = float(raw_input('Please enter the monthly minimum payment rate (e.g. 0.05): '))
+annualInterestRate = float(raw_input('Please enter the annual interest rate (e.g. 0.20): '))
 numMonths = float(raw_input('Please enter the number of months of payment: '))
 
 '''
@@ -44,6 +44,7 @@ def calcRemainingBalance(balance, monthlyPaymentRate, annualInterestRate, numMon
 
         # add interest to balance
         balance = balance + (balance * (annualInterestRate / 12.0))
+
         print 'Remaining balance: ', round(balance, 2)
 
     print 'Total paid: ', round(totalPaid, 2)
