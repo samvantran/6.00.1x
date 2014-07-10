@@ -92,6 +92,7 @@ def getWordScore(word, n):
         return totalWordScore + 50
     else:
         return totalWordScore
+
 #
 # Problem #2: Make sure you understand how this function works and what it does!
 #
@@ -159,9 +160,14 @@ def updateHand(hand, word):
     hand: dictionary (string -> int)    
     returns: dictionary (string -> int)
     """
-    # TO DO ... <-- Remove this comment when you code this function
-
-
+    # copy hand to avoid side effects
+    newHand = hand.copy()  
+    
+    # remove all letters played from hand
+    for l in word:                       
+        newHand[l] = newHand[l] - 1     
+    
+    return newHand
 
 #
 # Problem #3: Test word validity
