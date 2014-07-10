@@ -58,6 +58,9 @@ def getFrequencyDict(sequence):
 # (end of helper code)
 # -----------------------------------
 
+# create worst list
+WORDLIST = loadWords()
+
 #
 # Problem #1: Scoring a word
 #
@@ -76,7 +79,9 @@ def getWordScore(word, n):
     n: integer (HAND_SIZE; i.e., hand size required for additional points)
     returns: int >= 0
     """
-        
+    #verify word is valid or empty string
+    assert word in WORDLIST or word == '', 'Invalid word. Please try again' 
+    
     # initialize score counter
     wordScore = 0
     
@@ -89,8 +94,10 @@ def getWordScore(word, n):
     
     # print score and add 50 point bonus if full word used
     if len(word) == n:
+        print '"' + word + '" earned', totalWordScore + 50, 'points. Total:', totalWordScore + 50, 'points.'
         return totalWordScore + 50
     else:
+        print '"' + word + '" earned', totalWordScore, 'points. Total:', totalWordScore, 'points.'
         return totalWordScore
 #
 # Problem #2: Make sure you understand how this function works and what it does!
