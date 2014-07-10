@@ -209,9 +209,14 @@ def calculateHandlen(hand):
     hand: dictionary (string-> int)
     returns: integer
     """
-    # TO DO... <-- Remove this comment when you code this function
-
-
+    # init letter counter
+    numLetters = 0
+  
+    # iterate through hand; retrieve value at every key
+    for l in hand:
+        numLetters += hand.get(l, 0)
+    
+    return numLetters 
 
 def playHand(hand, wordList, n):
     """
