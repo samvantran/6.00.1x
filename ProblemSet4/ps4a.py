@@ -240,11 +240,12 @@ def playHand(hand, wordList, n):
       n: integer (HAND_SIZE; i.e., hand size required for additional points)
       
     """
-    # Keep track of the total score
+    # Keep track of the total score and num of letters
     totalScore = 0
+    len = calculateHandlen(hand)
     
     # As long as there are still letters left in the hand:
-    while calculateHandlen(hand) > 0:
+    while len > 0:
         
         # Display the hand
         print 'Current Hand:', displayHand(hand)
@@ -256,6 +257,7 @@ def playHand(hand, wordList, n):
         if word == '.':
             
             # End the game (break out of the loop)
+            len = 0
             break
             
         # Otherwise (the input is not a single period):
@@ -281,8 +283,10 @@ def playHand(hand, wordList, n):
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
     if word == '.':
         print 'Goodbye! Total score: ', totalScore, 'points.'
+
     else:
         print 'Run out of letters. Total score: ', totalScore, 'points.'
+
 
 #
 # Problem #5: Playing a game
@@ -300,11 +304,37 @@ def playGame(wordList):
  
     2) When done playing the hand, repeat from step 1    
     """
-    # TO DO ... <-- Remove this comment when you code this function
-    print "playGame not yet implemented." # <-- Remove this line when you code the function
-   
+    
+    # init empty hand (dictionary) and empty string
+    hand = {}
 
-
+    # allow for arbitrary number of hands
+    while True:
+        
+        # ask for user input
+        ans = raw_input('Enter n to play a new hand, r to reply the last hand, or e to end game:')
+        
+        # if n, deal new hand
+        if ans == 'n':
+            hand = dealHand(HAND_SIZE)
+            playHand(hand, wordList, HAND_SIZE)
+        
+        # if r, deal previous hand
+        elif ans == 'r':
+            if hand != {}:
+                playHand(hand, wordList, HAND_SIZE)
+            else:
+                print 'You have not played a hand yet. Please pay a new hand first!'
+        
+        # if e, end game
+        elif ans == 'e':
+            return
+            
+        # else, display invalid response
+        else:
+            print 'Invalid command.'
+    
+    return
 
 #
 # Build data structures used for entire session and play game
@@ -312,3 +342,6 @@ def playGame(wordList):
 if __name__ == '__main__':
     wordList = loadWords()
     playGame(wordList)
+    
+
+playGame(wordList)
