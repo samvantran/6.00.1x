@@ -152,9 +152,69 @@ def playGame(wordList):
 
     wordList: list (string)
     """
-    # TO DO... <-- Remove this comment when you code this function
-    print "playGame not yet implemented." # <-- Remove this when you code this function
-
+    # init empty hand (dictionary)
+    hand = {}
+    while True:
+        
+        # ask for user input
+        ans = raw_input('Enter n to play a new hand, r to replay the last hand, or e to end game: ')
+        
+        # if e, exit
+        if ans == 'e':
+            return
+        
+        # if n, deal new hand
+        elif ans == 'n':
+            hand = dealHand(HAND_SIZE)
+            #hand = origHand.copy()
+            
+            while True:
+                # ask user input u or c
+                ans2 = raw_input('Enter u to have yourself play, c to have the computer play: ')
+                print
+                
+                # if u, user to play
+                if ans2 == 'u':
+                    playHand(hand, wordList, HAND_SIZE)
+                    break
+                    
+                # if c, computer to play
+                elif ans2 == 'c':
+                    compPlayHand(hand, wordList, HAND_SIZE)
+                    break
+                else:
+                    print 'Invalid command.'        
+        
+        # if r, deal previous hand
+        elif ans == 'r':
+            
+            if hand != {}:
+                #hand = origHand.copy()
+                
+                while True:
+                    # ask user input u or c
+                    ans2 = raw_input('Enter u to have yourself play, c to have the computer play: ')
+                    print
+                
+                    # if u, user to play
+                    if ans2 == 'u':
+                        playHand(hand, wordList, HAND_SIZE)
+                        break
+                        
+                    # if c, computer to play
+                    elif ans2 == 'c':
+                        compPlayHand(hand, wordList, HAND_SIZE)
+                        break
+                        
+                    else:
+                        print 'Invalid command.'
+                
+            else:
+                print 'You have not played a hand yet. Please pay a new hand first!'
+            
+        # else, display invalid response
+        else:
+            print 'Invalid command.'
         
 #
 # Build data structures used for entire session and play game
@@ -164,4 +224,4 @@ if __name__ == '__main__':
     playGame(wordList)
 
 
-print compPlayHand({'a': 1, 'p': 2, 's': 1, 'e': 1, 'l': 1}, wordList, 6)
+print playGame(wordList)

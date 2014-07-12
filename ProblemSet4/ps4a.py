@@ -279,7 +279,8 @@ def playHand(hand, wordList, n):
                 print '"' + word  + '" earned', wordScore, 'points. Total: ', totalScore
                 
                 # Update the hand 
-                hand = updateHand(hand, word)                
+                hand = updateHand(hand, word)
+                len = calculateHandlen(hand)               
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
     if word == '.':
