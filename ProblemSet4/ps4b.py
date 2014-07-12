@@ -66,7 +66,7 @@ def compChooseWord(hand, wordList, n):
     # return the best word you found.
     # test: print 'And the best word is: ' + bestWord + ' with a top score of: ', maxScore
     if bestWord == '':
-        return None
+        return 
     else:
         return bestWord
 
@@ -92,7 +92,37 @@ def compPlayHand(hand, wordList, n):
     wordList: list (string)
     n: integer (HAND_SIZE; i.e., hand size required for additional points)
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    
+    # Keep track of the total score and num of letters
+    totalScore = 0
+    len = calculateHandlen(hand)
+    
+    # As long as there are still letters left in the hand:
+    while len > 0:
+        
+        # Display the hand
+        print 'Current Hand:', 
+        displayHand(hand)
+        
+        # computer chooses word
+        word = compChooseWord(hand, wordList, n)
+        
+        if word != None:
+        # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
+            wordScore = getWordScore(word, n)
+            totalScore += wordScore
+            print '"' + word  + '" earned', wordScore, 'points. Total:', totalScore, 'points.'
+            print
+
+            # Update the hand 
+            hand = updateHand(hand, word)
+            len = calculateHandlen(hand)
+        else:
+            break
+                    
+    print 'Total score:', totalScore, 
+    print 'points.'
+    return
     
 #
 # Problem #8: Playing a game
@@ -134,4 +164,4 @@ if __name__ == '__main__':
     playGame(wordList)
 
 
-print compChooseWord({'a': 1, 'p': 2, 's': 1, 'e': 1, 'l': 1}, wordList, 6)
+print compPlayHand({'a': 1, 'p': 2, 's': 1, 'e': 1, 'l': 1}, wordList, 6)

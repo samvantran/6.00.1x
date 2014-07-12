@@ -112,7 +112,8 @@ def displayHand(hand):
         for j in range(hand[letter]):
              print letter,              # print all on the same line
     print                               # print an empty line
-
+    return ''
+    
 #
 # Problem #2: Make sure you understand how this function works and what it does!
 #
@@ -334,7 +335,6 @@ def playGame(wordList):
         else:
             print 'Invalid command.'
     
-    return
 
 #
 # Build data structures used for entire session and play game
