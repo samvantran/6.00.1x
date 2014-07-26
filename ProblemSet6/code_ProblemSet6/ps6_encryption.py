@@ -156,8 +156,38 @@ def findBestShift(wordList, text):
     text: string
     returns: 0 <= int < 26
     """
-    ### TODO
-    return "Not yet implemented." # Remove this comment when you code the function
+    
+    # initialize counter for most valid words and shift key
+    mostValidWords = 0
+    bestKey = 0
+    
+    # applyShift 25 times using different shift keys (e.g. 1, 2, 3... 25)
+    for i in range(25):
+            
+        # create test string to capture shifted text
+        testString = applyShift(text, i)
+        
+        # split test string into a list of individual words
+        dividedText = testString.split(' ')
+        
+        # initialize counter for valid words
+        validWords = 0
+        
+        # check each for word for validity
+        for word in dividedText:
+            
+            # if isWord == True, increment valid word counter
+            if isWord(wordList, word):
+                validWords += 1
+                
+        # if current shifted text has more valid words than the last text, 
+        # record shift key and reset valid word count
+        if validWords > mostValidWords:
+            bestKey = i
+            validWords = 0
+        
+    # return shift key that deciphered the most valid words
+    return bestKey
 
 def decryptStory():
     """
