@@ -117,8 +117,20 @@ def applyCoder(text, coder):
     coder: dict with mappings of characters to shifted characters
     returns: text after mapping coder chars to original text
     """
-    ### TODO.
-    return "Not yet implemented." # Remove this comment when you code the function
+    # create empty string to capture ciphertext
+    newString = ''
+    
+    # load shifted dict
+    shift = coder
+    
+    # for every character in string text, shift by coded amount only if character is an ascii char
+    for char in text:
+        if char in string.ascii_letters:
+            newString += shift[char]
+        else:
+            newString += char
+        
+    return newString
 
 def applyShift(text, shift):
     """
