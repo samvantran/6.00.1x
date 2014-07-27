@@ -80,7 +80,7 @@ def getStoryString():
     """
     Returns a story in encrypted text.
     """
-    return open("story.txt", "r").read()
+    return open("/Users/svt/Desktop/6.00.1x/ProblemSet6/code_ProblemSet6/story.txt", "r").read()
 
 
 # (end of helper code)
@@ -162,7 +162,7 @@ def findBestShift(wordList, text):
     bestKey = 0
     
     # applyShift 25 times using different shift keys (e.g. 1, 2, 3... 25)
-    for i in range(25):
+    for i in range(1, 26):
             
         # create test string to capture shifted text
         testString = applyShift(text, i)
@@ -184,9 +184,11 @@ def findBestShift(wordList, text):
         # record shift key and reset valid word count
         if validWords > mostValidWords:
             bestKey = i
+            mostValidWords = validWords
             validWords = 0
         
     # return shift key that deciphered the most valid words
+    print mostValidWords
     return bestKey
 
 def decryptStory():
@@ -198,8 +200,17 @@ def decryptStory():
 
     returns: string - story in plain text
     """
-    ### TODO.
-    return "Not yet implemented." # Remove this comment when you code the function
+    # read file containing encrypted text
+    encryptedStory = getStoryString()
+    
+    # load words
+    wordList = loadWords()
+    
+    # determine best shift key
+    bestShift = findBestShift(wordList, encryptedStory)
+    
+    # return deciphered text
+    return applyShift(encryptedStory, bestShift)
 
 #
 # Build data structures used for entire session and run encryption
