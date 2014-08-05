@@ -87,11 +87,43 @@ class Trigger(object):
 # Problems 2-5
 
 # TODO: WordTrigger
+class WordTrigger(Trigger):
+    def __init__(self, word):
+        self.word = word.lower()
+        
+    def isWordIn(self, text):
+        textCopy = text.lower()
+        
+        # test string
+        strTest = ''
+        
+        for l in textCopy:
+            if l in string.ascii_lowercase:
+                strTest += l
+            else:
+                if self.word == str(strTest):
+                    return True
+                strTest = ''
+        return False
+                
 
 # TODO: TitleTrigger
+class TitleTrigger(WordTrigger):
+    def evaluate(self, text):
+        title = text.getTitle()
+        return self.isWordIn(title)
+    
 # TODO: SubjectTrigger
+class SubjectTrigger(WordTrigger):
+    def evaluate(self, text):
+        subject = text.getSubject()
+        return self.isWordIn(subject)
+        
 # TODO: SummaryTrigger
-
+class SummaryTrigger(WordTrigger):
+    def evaluate(self, text):
+        summary = text.getSummary()
+        return self.isWordIn(summary)
 
 # Composite Triggers
 # Problems 6-8
