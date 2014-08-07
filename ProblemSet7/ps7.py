@@ -109,35 +109,76 @@ class WordTrigger(Trigger):
 
 # TODO: TitleTrigger
 class TitleTrigger(WordTrigger):
-    def evaluate(self, text):
-        title = text.getTitle()
-        return self.isWordIn(title)
+    def evaluate(self, story):
+        return self.isWordIn(story.getTitle())
     
 # TODO: SubjectTrigger
 class SubjectTrigger(WordTrigger):
-    def evaluate(self, text):
-        subject = text.getSubject()
-        return self.isWordIn(subject)
+    def evaluate(self, story):
+        return self.isWordIn(story.getSubject())
         
 # TODO: SummaryTrigger
 class SummaryTrigger(WordTrigger):
-    def evaluate(self, text):
-        summary = text.getSummary()
-        return self.isWordIn(summary)
+    def evaluate(self, story):
+        return self.isWordIn(story.getSummary())
 
 # Composite Triggers
 # Problems 6-8
 
 # TODO: NotTrigger
+class NotTrigger(Trigger):
+    def __init__(self, trigger):
+        self.trigger = trigger
+    
+    def evaluate(self, story):
+        if not self.trigger.evaluate(story):
+            return True
+        else:
+            return False
+    
 # TODO: AndTrigger
+class AndTrigger(Trigger):
+    def __init__(self, trigger1, trigger2):
+        self.trigger1 = trigger1
+        self.trigger2 = trigger2
+        
+    def evaluate(self, story):
+        if self.trigger1.evaluate(story) and self.trigger2.evaluate(story):
+            return True
+        else:
+            return False
+        
+    
 # TODO: OrTrigger
-
+class OrTrigger(Trigger):
+    def __init__(self, trigger1, trigger2):
+        self.trigger1 = trigger1
+        self.trigger2 = trigger2
+        
+    def evaluate(self, story):
+        if self.trigger1.evaluate(story) or self.trigger2.evaluate(story):
+            return True
+        else:
+            return False
+        
 
 # Phrase Trigger
 # Question 9
 
 # TODO: PhraseTrigger
-
+class PhraseTrigger(Trigger):
+    def __init__(self,  phrase):
+        self.phrase = phrase
+        
+    def evaluate(self, text):
+        subject = text.getSubject()
+        title = text.getTitle()
+        summary = text.getSummary()
+        
+        if self.phrase in subject or self.phrase in title or self.phrase in summary:
+            return True
+        else:
+            return False
 
 #======================
 # Part 3
