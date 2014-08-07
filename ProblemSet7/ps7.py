@@ -171,11 +171,7 @@ class PhraseTrigger(Trigger):
         self.phrase = phrase
         
     def evaluate(self, text):
-        subject = text.getSubject()
-        title = text.getTitle()
-        summary = text.getSummary()
-        
-        if self.phrase in subject or self.phrase in title or self.phrase in summary:
+        if self.phrase in text.getSubject() or self.phrase in text.getTitle() or self.phrase in text.getSummary():
             return True
         else:
             return False
@@ -192,8 +188,15 @@ def filterStories(stories, triggerlist):
     Returns: a list of only the stories for which a trigger in triggerlist fires.
     """
     # TODO: Problem 10
-    # This is a placeholder (we're just returning all the stories, with no filtering) 
-    return stories
+    
+    storylist = []
+    for t in triggerlist:
+        for s in stories:
+            if t.evaluate(s):
+                if not s in storylist:
+                    storylist.append(s)
+            
+    return storylist
 
 #======================
 # Part 4
